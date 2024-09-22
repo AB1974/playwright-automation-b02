@@ -1,6 +1,6 @@
 import { test,expect } from '@playwright/test';
 
-test.describe('Test Group', () => {
+test.describe('Array of Elements', () => {
 let elements;
     test.beforeEach(async({page})=>{
       await page.goto("https://practice.cydeo.com/");
