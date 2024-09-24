@@ -75,7 +75,7 @@ test.describe("Practice Task", () => {
       "//input[@id='defaultCheck2' and @type='checkbox']"
     );
 
-    await expect(checkboxNotChecked).not.toBeChecked();
+    expect(await checkboxNotChecked.isChecked()).toBeFalsy()
     await page.waitForTimeout(3000);
     //9. Enter card informations
     //iframe
