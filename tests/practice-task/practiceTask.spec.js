@@ -1,22 +1,21 @@
-import { test,expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test.describe('Practice Task', () => {
+test.describe("Practice Task", () => {
+  test.beforeEach(async ({ page }) => {
+    //https://username:password@url- We can embade credentials into the url
+    //  await page.goto("https://automation-user:123abc@qa.sep.tdtm.cydeo.com/taws");
+    //encoding credentials in Base64 format we can add as a header
+    let encodedCredentials = Buffer.from("automation-user:123abc").toString(
+      "base64"
+    );
 
-test.beforeEach(async ({ page }) => {
-  //https://username:password@url- We can embade credentials into the url
-  //  await page.goto("https://automation-user:123abc@qa.sep.tdtm.cydeo.com/taws");
-  //encoding credentials in Base64 format we can add as a header
-  let encodedCredentials = Buffer.from("automation-user:123abc").toString(
-    "base64"
-  );
-
-  //set up an authentication header
-  await page.setExtraHTTPHeaders({
-    Authorization: `Basic ${encodedCredentials}`,
+    //set up an authentication header
+    await page.setExtraHTTPHeaders({
+      Authorization: `Basic ${encodedCredentials}`,
+    });
+    await page.goto("https://qa.sep.tdtm.cydeo.com/taws");
+    //1. Navigate to https://qa.sep.tdtm.cydeo.com/taws (Web based Authentication is needed)
   });
-  await page.goto("https://qa.sep.tdtm.cydeo.com/taws");
-  //1. Navigate to https://qa.sep.tdtm.cydeo.com/taws (Web based Authentication is needed)
-});
 
   test("Verify that title is Checkout | Cydeo", async ({ page }) => {
     //2. Verify that title is "Checkout | Cydeo"
@@ -61,7 +60,7 @@ test.beforeEach(async ({ page }) => {
     await expect(nextButtondisabled).toBeDisabled();
     //5. Select one of the payment option
     let upfront = page.locator(
-  "//mat-panel-title[contains(@class, 'payment-panel-title')]//span[@class='payment-type' and normalize-space()='Upfront']"
+      "//mat-panel-title[contains(@class, 'payment-panel-title')]//span[@class='payment-type' and normalize-space()='Upfront']"
     );
     await upfront.click();
     await page.waitForTimeout(3000);
@@ -72,39 +71,39 @@ test.beforeEach(async ({ page }) => {
     await nextButtonEnabled.click();
     await page.waitForTimeout(3000);
     // 8. Verify that the terms & conditions check box is unchekced by default
-    let checkboxNotChecked = page.locator("//input[@id='defaultCheck2' and @type='checkbox']");
+    let checkboxNotChecked = page.locator(
+      "//input[@id='defaultCheck2' and @type='checkbox']"
+    );
 
     await expect(checkboxNotChecked).not.toBeChecked();
     await page.waitForTimeout(3000);
     //9. Enter card informations
     //iframe
-    let myframe1 = page.frameLocator("//div[@class='__PrivateStripeElement']/iframe");
+    let myframe1 = page.frameLocator(
+      "//div[@class='__PrivateStripeElement']/iframe"
+    );
     let cardNumber = myframe1.locator("//input[@id='Field-numberInput']");
     await page.waitForTimeout(3000);
     await cardNumber.fill("4242424242424242");
     await page.waitForTimeout(3000);
     let expiryDate = myframe1.locator("//input[@id='Field-expiryInput']");
     await expiryDate.fill("12/25");
-   
+
     let cvc = myframe1.locator("//input[@id='Field-cvcInput']");
     await cvc.fill("123");
-   
+
     let zipCode = myframe1.locator("//input[@id='Field-postalCodeInput']");
     await zipCode.fill("92656");
-    
+
     //10. Check the terms & conditions check box
     await checkboxNotChecked.check();
-    
-    //11.Click Pay button 
+
+    //11.Click Pay button
     let payButton = page.locator("//span[.='Pay']");
-     await payButton.click();
+    await payButton.click();
 
-     //12. Verify that the payment made successfully
-     let successfull = page.locator("//p[.='Payments confirmation ']");
-      await expect(successfull).toHaveText("Payments confirmation");
-
+    //12. Verify that the payment made successfully
+    let successfull = page.locator("//p[.='Payments confirmation ']");
+    await expect(successfull).toHaveText("Payments confirmation");
   });
-
-
-
 });
