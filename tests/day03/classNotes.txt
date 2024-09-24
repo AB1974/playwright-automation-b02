@@ -1,0 +1,15 @@
+Playwright Day03
+
+Topics:
+    Locator Object Methods Continue
+	Web Based Authentication
+	Environment Variables (extension & terminal)
+	Assertions Intro
+
+
+Next Class:
+    Assertions Continue
+	iframes
+	Alerts
+	Mouse Actions
+	Web Tables
