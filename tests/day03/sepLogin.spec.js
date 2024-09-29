@@ -7,9 +7,11 @@ test("SEP Login", async ({ page }) => {
     Authorization: `Basic ${code}`,
   });
 
-  await page.goto(process.env.SEP_URL);
-
-  await page.waitForTimeout(5000);
+  await page.goto(`${process.env.SEP_URL}`);
 
   expect(await page.title()).toContain("Checkout");
+
+  console.log(`${process.env.SEP_USERNAME}`);
+   console.log(`${process.env.SEP_PASSWORD}`);
+    console.log(`${process.env.SEP_URL}`);
 });
