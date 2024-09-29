@@ -5,7 +5,7 @@
   
   "scripts": {
     "test": "npx playwright test",
-    "test:specific": "npx playwright test --grep testGroupPractice",
+    "test:specific": "npx playwright test --grep sepLogin.spec.js",
     "test:tag": "npx playwright test --grep @smoke",
     "report": "npx playwright show-report"
   },
