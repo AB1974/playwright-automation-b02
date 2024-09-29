@@ -1,0 +1,16 @@
+Playwright Automation Day05
+
+Topics:
+    Recap
+	Mouse Actions
+    Web Tables
+
+
+Next Class:
+    File upload & download
+    More AI ====>  1. Playwright with JavaScript,  2. Playwright Method Explination
+    Running playwright with Jenkins
+
+
+Next Next Class: 3 hours recording class ===> 3 user stories
+    Project Implementation week

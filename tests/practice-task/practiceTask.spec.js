@@ -79,21 +79,19 @@ test.describe("Practice Task", () => {
     await page.waitForTimeout(3000);
     //9. Enter card informations
     //iframe
-    let myframe1 = page.frameLocator(
-      "//div[@class='__PrivateStripeElement']/iframe"
-    );
+    let myframe1 = page.frameLocator("//div[@class='__PrivateStripeElement']/iframe");
     let cardNumber = myframe1.locator("//input[@id='Field-numberInput']");
     await page.waitForTimeout(3000);
-    await cardNumber.fill("4242424242424242");
+    await cardNumber.fill(process.env.CARD_NUMBER);
     await page.waitForTimeout(3000);
     let expiryDate = myframe1.locator("//input[@id='Field-expiryInput']");
-    await expiryDate.fill("12/25");
+    await expiryDate.fill(process.env.EXPIRATION_DATE);
 
     let cvc = myframe1.locator("//input[@id='Field-cvcInput']");
-    await cvc.fill("123");
+    await cvc.fill(process.env.CVC);
 
     let zipCode = myframe1.locator("//input[@id='Field-postalCodeInput']");
-    await zipCode.fill("92656");
+    await zipCode.fill(process.env.ZIP_CODE);
 
     //10. Check the terms & conditions check box
     await checkboxNotChecked.check();
